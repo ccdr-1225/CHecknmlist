@@ -29,33 +29,35 @@ while True:
     print("4：导出未观看")
     print("5：添加原名单")
     print("6：删除原名单")
-    print("#：退出")
+    print("break：退出")
 
     a=input("操作模式")
     print(type(name_list))
     sum_num = 0
     if a=="1":#add name
-        append_nm=input("input name:(back)")
-        if append_nm in name_list:
-            print("{} is in the name_list".format(append_nm))
-        elif append_nm not in orgname_list:
-            print("{} is not in the orgname_list".format(append_nm))
-        elif append_nm=="back":
-            continue
-        else:
-            name_list.append(append_nm)
+        while True:
+            append_nm=input("input name:(back)")
+            if append_nm in name_list:
+                print("{} is in the name_list".format(append_nm))
+            elif append_nm not in orgname_list:
+                print("{} is not in the orgname_list".format(append_nm))
+            elif append_nm=="back":
+                break
+            else:
+                name_list.append(append_nm)
     elif a=="2":#output namelist
         print(name_list)
         print("the sum is {}".format(len(name_list)))
     elif a=="3":#delet name
-        print(name_list)
-        delet_name=input("input name:want to delet(back)")
-        if delet_name not in name_list:
-            print("{} is not in name_list".format(delet_name))
-        elif delet_name=="back":
-            continue
-        else:
-            name_list.remove(delet_name)
+        while True:
+            print(name_list)
+            delet_name=input("input name:want to delet(back)")
+            if delet_name not in name_list:
+                print("{} is not in name_list".format(delet_name))
+            elif delet_name=="back":
+                break
+            else:
+                name_list.remove(delet_name)
     elif a=="4":#output no list name
         for temp_name in orgname_list:
             if temp_name not in name_list:
@@ -63,23 +65,25 @@ while True:
                 sum_num+=1
         print("the sum is {} ".format(sum_num))
     elif a=="5":#add orgnamelist
-        append_nm=input("input name:(back)")
-        if append_nm in orgname_list:
-            print("{} is in the orgname_list".format(append_nm))
-        elif append_nm=="back":
-            continue
-        else:
-            orgname_list.append(append_nm)
+        while True:
+            append_nm=input("input name:(back)")
+            if append_nm in orgname_list:
+                print("{} is in the orgname_list".format(append_nm))
+            elif append_nm=="back":
+                break
+            else:
+                orgname_list.append(append_nm)
     elif a=="6":#delet orgnamelist
-        print(orgname_list)#
-        delet_name=input("input name:want to delet(back)")
-        if delet_name not in orgname_list:
-            print("{} is not in orgname_list".format(delet_name))
-        elif delet_name=="back":
-            continue
-        else:
-            orgname_list.remove(delet_name)
-    elif a=="#":#break
+        while True:
+            print(orgname_list)#
+            delet_name=input("input name:want to delet(back)")
+            if delet_name not in orgname_list:
+                print("{} is not in orgname_list".format(delet_name))
+            elif delet_name=="back":
+                break
+            else:
+                orgname_list.remove(delet_name)
+    elif a=="break":#break
         break
     elif a=="101":#debug 
         print("name_list == {}".format(name_list))
@@ -104,3 +108,5 @@ opnlist = open ('python\listmagnger\orglist.txt','w')
 opnlist.writelines(forgname_list)
 opnlist.close()
 
+# 更新日志 2021-5-25 Version 0.0.3.0
+# 更改操作逻辑，无需重复选择。
