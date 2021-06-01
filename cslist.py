@@ -5,13 +5,14 @@ import json
 #打开操作表-操作输出名单-重置
 print(os.getcwd())
 
-# porgnamelist = open ('python\\listmagnger\\namelist\\orglist.txt','r')
-# porgname_list=porgnamelist.readlines()
-# porgnamelist.close()
-
-# opnlist = open ('python\\listmagnger\\namelist\\oprlist.txt','r')
-# pname_list=opnlist.readlines()
-# opnlist.close()
+# 更新日志 Version 0.1.0.1 m_debug
+# 修改删除个人信息无法彻底删除
+# 增加删除前名单展示功能
+# 更改删除名单提示语
+# 增加删除确认操作
+# 增加删除名单时，总数显示
+# 修复完成名单 名字显示错误
+# 增加显示已完成人数功能
 
 # dic = {  
 #     'andy':{  
@@ -45,6 +46,13 @@ file_pname=open("python\listmagnger\\namelist\dit_pnamelist.txt","r")
 js_pname=file_pname.read()
 dict_pname=json.loads(js_pname)
 
+# porgnamelist = open ('python\\listmagnger\\namelist\\orglist.txt','r')
+# porgname_list=porgnamelist.readlines()
+# porgnamelist.close()
+
+# opnlist = open ('python\\listmagnger\\namelist\\oprlist.txt','r')
+# pname_list=opnlist.readlines()
+# opnlist.close()
 #delete \n
 # name_list=[]
 # orgname_list=[]
@@ -106,13 +114,20 @@ while True:
         print("dict_oname is clear")
     elif tempinput=="o-delet-name":
         while True:
-            name_input=input("name first:")
+            print(dict_oname)
+            print(len(dict_oname),end="\n====**===")
+            name_input=input("input name:(you want to delet)")
             if name_input=="back":
                 break
             elif name_input not in dict_oname:
                 print("{} is not in dict_oname".format(name_input))
             else:
-                dict_oname.get(name_input).clear()
+                besure=input("are you sure to delet {}:(y/...)".format(name_input))
+                if besure=="y" or besure=="Y":
+                    dict_oname.pop(name_input)
+                    print("{} delete finish".format(name_input))
+                else:
+                    print("{} delete fail".format(dict_oname))
     elif tempinput=="o-modify":
         while True:
             print(dict_oname)
@@ -157,24 +172,32 @@ while True:
             else:
                 temp_dict=dict_oname[add_name_input]
                 dict_pname[add_name_input]=temp_dict
-                print("add_pname finish")
-                print(dict_pname[add_name_input])
+                print("{} add_pname finish".format(add_name_input))
+                # print(dict_pname[add_name_input])
     elif tempinput=="p-output-all":
         print(dict_pname)
     elif tempinput=="p-output-name":
         print(dict_pname.keys())
+        print(len(dict_pname.keys()))
     elif tempinput=="p-delet-all":
         dict_pname.clear()
         print("dict_pname clear finish")
     elif tempinput=="p-delet-name":
         while True:
-            delet_name=input('the name what you want to delet:')
-            if delet_name=="back":
+            print(dict_pname)
+            print(len(dict_pname),end="\n")
+            name_input=input("input name(you want to delet):")
+            if name_input=="back":
                 break
-            elif delet_name not in dict_pname:
-                print("{} is not in the dict_pname".format(delet_name))
+            elif name_input not in dict_pname:
+                print("{} is not in dict_pname".format(name_input))
             else:
-                dict_pname.pop(delet_name)
+                besure=input("are you sure to delet {}:(y/...)".format(name_input))
+                if besure=="y" or besure=="Y":
+                    dict_pname.pop(name_input)
+                    print("{} delete finish".format(name_input))
+                else:
+                    print("{} delete fail".format(dict_pname))
     elif tempinput=="output-all":
         print(dict_oname)
         print(dict_pname)
